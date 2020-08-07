@@ -1,0 +1,13 @@
+wordpressUsername: user
+wordpressPassword: pass
+wordpressEmail: helm-user@example.com
+wordpressFirstName: Helm_is
+wordpressLastName: Fun
+wordpressBlogName: Learn Helm opa opa this is an error!
+service:
+  type: NodePort
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 50m
+replicaCount: 1

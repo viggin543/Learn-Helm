@@ -1,0 +1,16 @@
+apiVersion: v2
+name: guestbook
+description: A Helm chart for Kubernetes
+# _helpers.tpl library or an application
+type: application
+# chart version
+version: 0.1.3
+# application version (  guestbook app version )
+appVersion: v4
+# run $ helm dependency update $ this will download the dependency chart to charts folder and generate the Charts.lock file
+dependencies:
+  - name: redis
+    version: 10.5.x
+    repository: https://charts.bitnami.com/bitnami
+
+

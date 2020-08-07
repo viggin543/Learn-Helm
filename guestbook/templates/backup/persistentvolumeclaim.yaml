@@ -1,0 +1,17 @@
+{{- if .Values.redis.master.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{include "guestbook.redisBackupPvcName" .}}
+  labels:
+  {{- include "guestbook.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-upgrade
+    "helm.sh/hook-weight": "0" # 0 --> will run first
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.redis.master.persistence.size }}
+  {{- end }}
