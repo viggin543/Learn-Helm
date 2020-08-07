@@ -1,37 +1,85 @@
-## Welcome to GitHub Pages
+## An example helm chart
+based on a tutorial from the Packt book - "learn helm"
+[book repo](https://github.com/PacktPublishing/-Learn-Helm)
 
-You can use the [editor on GitHub](https://github.com/viggin543/Learn-Helm/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+### Helm cheat sheet
+---
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## search
 
-### Markdown
+- `helm search hub <>chart --max-col-width=0`  → search for a chart on helm hub
+    - `--max-col-width=0` → avoid truncating url of chart
+    - `--output yaml`
+- `helm search repo <repo> <chart>` → search for a chart on helm
+    - helm search repo bitnami --output yaml
+    - `helm search repo wordpress`
+    - `helm search repo bitnami/wordpress --versions` → print all chart versions
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+    ---
 
-```markdown
-Syntax highlighted code block
+    ---
 
-# Header 1
-## Header 2
-### Header 3
+## get
 
-- Bulleted
-- List
+- `helm get hooks wordpress -n wordpress` → hooks can be thought of as the actions that Helm performs during certain phases of an application's life cycle.
+- `helm get manifest wordpress -n wordpress` → get a list of the Kubernetes resources that were created as part of the installation
+    - also supports the `--revision`flag to get resources created by specific revision
+- `helm get notes`
+- `helm get values wordpress --namespace wordpress` → will print the non default values provided  ( the values we overrode when installing the chart )
+- `helm get values wordpress --namespace wordpress` → print all values
+- `k get all -l app=wordpress --namespace wordpress` → get resources tagged with release name ( wordpress )
+- `helm get values wordpress --revision 3 -n wordpress` → get values of previous revision
 
-1. Numbered
-2. List
+## install
 
-**Bold** and _Italic_ and `Code` text
+- `cd ~/personal_projects/learn_helm/; helm install wordpress bitnami/wordpress --values=wordpress-values.yaml --namespace wordpress --version 8.1.0`
+- `helm get notes wordpress -n ${release:-wordpress}` → get notes of release
+- `helm list --namespace wordpress` → list all releases in namespace
 
-[Link](url) and ![Image](src)
+## info
+
+- `helm show chart bitnami/wordpress --version 8.1.0` → show chart details ( including gihub source of repo )
+- `helm show values bitnami/wordpress --version 8.1.0 | rg -v \#` → print values
+- `helm show readme bitnami/wordpress --version 8.1.0`
+
+## upgrade
+
+- `helm upgrade wordpress bitnami/wordpress --values wordpress-values.yaml -n wordpress --version 8.1.0` → after updating values.yaml
+    - `--reset-values` ,  `-—reuse-values` → if no `—-values` flag is passed to the upgrade command the values are reused from prev command. HOWEVER, if at lesat one `—-set` flag is passed, then the reset values flag is used implicitly. So be careful ! always pass both values, and set flags. [ the set flag should be used for secrets only ]
+    - `--no-hooks` → will ignore the hooks
+
+## uninstall
+
+- `helm uninstall wordpress -n wordpress`
+    - use `--keep-history` to retain the release history
+
+**PersistentVolumeClaim** is not deleted automatically since it is was created with an annotation of : `'helm.sh/resource-policy': keep` which instructed helm to not delete this resource on uninstall
+
+to cleanup run → `kubectl delete pvc -l release=wordpress -n wordpress` to delete it. Also dont forget to delete the namespace `k delete namespace wordpress`
+
+A Persistent Volume Claim is a request to use a Persistent Volume. If we are to use the Pods and Nodes analogy, then consider Persistent Volumes as the “nodes” and Persistent Volume Claims as the “pods”
+
+## rollback
+
+- `helm history wordpress 4 -n wordpress` → roll back to revision 4
+    - after rolling back a new revision will be created with info ( rolled back to 4 )
+- `--no-hooks` → will ignore the hooks
+
+## create
+
+`helm create guestbook` → like git init or npm init. cheers
+
+## dependencies
+
+`helm dependency update` → will downlad char dependencies to charts folder, and generte Charts.lock
+
+double check when member arrives to destination to create 
+
+### examples:
+
+```bash
+helm install mybook guestbook  -n guestbook --values guestbook/values.yaml --set redis.cluster.slaveCount=0 --no-hooks
+helm upgrade mybook guestbook -n guestbook --values guestbook/values.yaml --set redis.cluster.slaveCount=0
+helm uninstall mybook  -n guestbook
+helm rollback mybook 3 -n guestbook
 ```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/viggin543/Learn-Helm/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
