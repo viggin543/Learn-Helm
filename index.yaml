@@ -1,9 +1,20 @@
 apiVersion: v1
 entries:
+  banana:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2020-08-08T16:15:30.320841+03:00"
+    description: A Helm chart for Kubernetes
+    digest: 699891ecf0bcf84dbafc1547ceae2a6af2c093721d88f1248d8184ca8cd77984
+    name: banana
+    type: application
+    urls:
+    - banana-0.1.0.tgz
+    version: 0.1.0
   guestbook:
   - apiVersion: v2
     appVersion: v4
-    created: "2020-08-08T15:35:42.451645+03:00"
+    created: "2020-08-08T16:15:30.331812+03:00"
     dependencies:
     - name: redis
       repository: https://charts.bitnami.com/bitnami
@@ -15,4 +26,32 @@ entries:
     urls:
     - guestbook-1.0.2.tgz
     version: 1.0.2
-generated: "2020-08-08T15:35:42.444107+03:00"
+  - apiVersion: v2
+    appVersion: v4
+    created: "2020-08-08T16:15:30.327979+03:00"
+    dependencies:
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.5.x
+    description: A Helm chart for Kubernetes
+    digest: d63dbc3df98a5f9d4b1d705c67b8cbdb14a39e65a33f78b45b7a4f80274b9ba2
+    name: guestbook
+    type: application
+    urls:
+    - guestbook-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: v4
+    created: "2020-08-08T16:15:30.32487+03:00"
+    dependencies:
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.5.x
+    description: A Helm chart for Kubernetes
+    digest: cc577ab4b7b30d35b858c984712a14c6804b52700dffde46f48456dc99bfb4b8
+    name: guestbook
+    type: application
+    urls:
+    - guestbook-1.0.0.tgz
+    version: 1.0.0
+generated: "2020-08-08T16:15:30.320097+03:00"
