@@ -12,7 +12,7 @@ spec:
     - name: test-backend-connection
       image: redis:alpine3.11
       command: ["/bin/sh", "-c"]
-      args: ["redis-cli -h {{ .Values.redis.fullnameOverride }}-master MGET messages"]
+      args: ["echo 'testing redis master is up';redis-cli -h {{ .Values.redis.fullnameOverride }}-master MGET messages"]
   restartPolicy: Never
 ---
 apiVersion: v1
@@ -29,7 +29,7 @@ spec:
     - name: test-frontend-connection
       image: curlimages/curl:7.68.0
       command: ["/bin/sh", "-c"]
-      args: ["curl {{ include "guestbook.fullname" . }}"]
+      args: ["echo 'testing php is up';curl {{ include "guestbook.fullname" . }}:{{ .Values.service.port }}"]
   restartPolicy: Never
 ---
 
@@ -49,6 +49,6 @@ spec:
     - name: test-backend-connection
       image: redis:alpine3.11
       command: ["/bin/sh", "-c"]
-      args: ["redis-cli -h {{ .Values.redis.fullnameOverride }}-slave MGET messages"]
+      args: ["echo 'testing redis slave is up';redis-cli -h {{ .Values.redis.fullnameOverride }}-slave MGET messages"]
   restartPolicy: Never
 {{- end}}
