@@ -1,4 +1,3 @@
 guestbook/charts/redis-10.5.14.tgz
-guestbook-1.0.1.tgz
-guestbook-1.0.2.tgz
+*.tgz
 index.yaml
