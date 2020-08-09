@@ -1,3 +1,4 @@
-#helm-charts/guestbook/charts/redis-10.5.14.tgz
-#*.tgz
-#index.yaml
+helm-charts/guestbook/charts/redis-10.5.14.tgz
+*.tgz
+index.yaml
+source_repo
