@@ -4,7 +4,7 @@ description: A Helm chart for Kubernetes
 # _helpers.tpl library or an application
 type: application
 # chart version
-version: 1.0.2
+version: 1.0.3
 # application version (  guestbook app version )
 appVersion: v4
 # run $ helm dependency update $ this will download the dependency chart to charts folder and generate the Charts.lock file
