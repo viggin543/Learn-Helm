@@ -1,0 +1,51 @@
+apiVersion: helm.operator-sdk/v1alpha1
+kind: Guestbook
+metadata:
+  name: example-guestbook
+spec:
+  # Default values copied from <project_dir>/helm-charts/guestbook/values.yaml
+  
+  affinity: {}
+  autoscaling:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  fullnameOverride: ""
+  image:
+    pullPolicy: IfNotPresent
+    repository: gcr.io/google-samples/gb-frontend
+    tag: ""
+  imagePullSecrets: []
+  ingress:
+    annotations: {}
+    enabled: false
+    hosts:
+    - host: chart-example.local
+      paths: []
+    tls: []
+  nameOverride: ""
+  nodeSelector: {}
+  podAnnotations: {}
+  podSecurityContext: {}
+  redis:
+    cluster:
+      slaveCount: 2
+    configmap: appendonly no
+    fullnameOverride: redis
+    master:
+      persistence:
+        size: 100Mi
+    usePassword: false
+  replicaCount: 1
+  resources: {}
+  securityContext: {}
+  service:
+    port: 8082
+    type: LoadBalancer
+  serviceAccount:
+    annotations: {}
+    create: true
+    name: ""
+  tolerations: []
+  

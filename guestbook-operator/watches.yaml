@@ -1,0 +1,5 @@
+---
+- group: helm.operator-sdk
+  version: v1alpha1
+  kind: Guestbook
+  chart: helm-charts/guestbook

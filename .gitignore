@@ -2,3 +2,10 @@ helm-charts/guestbook/charts/redis-10.5.14.tgz
 *.tgz
 index.yaml
 source_repo
+helm-charts/guestbook/Chart.lock
+helm-charts/guestbook/Chart.yaml
+helm-charts/guestbook/charts
+helm-charts/guestbook/templates
+helm-charts/guestbook/values.yaml
+helm-charts/guestbook
+guestbook-operator/helm-charts/guestbook
