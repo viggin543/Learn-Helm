@@ -30,7 +30,7 @@ spec:
   podSecurityContext: {}
   redis:
     cluster:
-      slaveCount: 2
+      slaveCount: 1
     configmap: appendonly no
     fullnameOverride: redis
     master:
